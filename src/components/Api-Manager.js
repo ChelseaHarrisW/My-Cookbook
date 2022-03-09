@@ -7,8 +7,8 @@ export const getAllRecipesWithDifficultyAndCategory = () => {
     return fetch(`http://localhost:8088/recipes?_expand=difficulty&_expand=category`)
     .then(res => res.json())
 }
-export const getAllRecipesWithIngredients = () => {
-    return fetch(`http://localhost:8088/recipeIngredients?_expand=recipe&_expand=ingredient`)
+export const getAllRecipesWithIngredients = (recipeId) => {
+    return fetch(`http://localhost:8088/recipeIngredients/?_expand=recipe&_expand=ingredient&recipeId=${recipeId}`)
     .then(res => res.json())
 }
 export const getAllFavoritesByUser = () => {

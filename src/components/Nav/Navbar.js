@@ -9,7 +9,13 @@ export const Navbar = (props) => {
     return (
         <ul className="navbar">
              <li className="navbar__item active">
-                <Link className="navbar__link" to="/">Recipe</Link>
+                <Link className="navbar__link" to="/">My Recipe Dashboard</Link>
+            </li>
+             <li className="navbar__item active">
+                <Link className="navbar__link" to="/recipe-details">My Recipe Details</Link>
+            </li>
+             <li className="navbar__item active">
+                <Link className="navbar__link" to="/">Edit My Recipe</Link>
             </li>
            
             <li className="navbar__item active">

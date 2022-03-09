@@ -2,7 +2,8 @@
 
 import React from "react";
 import { Route } from "react-router-dom";
-import { RecipeList } from "../Recipe/RecipieList";
+import { RecipeCard } from "../Recipe/RecipeCard";
+import { RecipeList } from "../Recipe/RecipeList";
 
 
 
@@ -14,6 +15,9 @@ export const ApplicationViews = () => {
         <>
        <Route exact path = {["/", "/recipe"]}>
            <RecipeList />
+       </Route>
+       <Route exact path =  "/recipe-details/:recipeId(\d+)">
+           <RecipeCard />
        </Route>
         
         </>
