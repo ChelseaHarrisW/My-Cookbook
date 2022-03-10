@@ -25,7 +25,7 @@ export const RecipeList = () => {
     return (
         <>
             <h2>My Recipe Dashboard</h2>
-
+            <button onClick={() => { history.push("/recipe/create") }}>+ My New Recipe</button>
             {
                 Recipes.map(Recipe => {
                     return <div key={`recipe--${Recipe.id}`} className="recipe">
