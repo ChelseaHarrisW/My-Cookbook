@@ -24,31 +24,14 @@ export const getAllFavoritesByUser = () => {
     return fetch(`http://localhost:8088/userFavorites?_expand=user`)
     .then(res => res.json())
 }
-
-//Fetch calls posting new data to the API aka
-//POST
-
-export const saveRecipe = (SubmitRecipeClicked) => {
-    
-    SubmitRecipeClicked.preventDefault()
-    
-    const submitRecipe = {
-        "title": SubmitRecipeClicked.title,
-        "measurement":SubmitRecipeClicked.measurement,
-        "ingredients": SubmitRecipeClicked.ingredient.name,
-        "cookTime": SubmitRecipeClicked.cookTime,
-        "difficultyId": parseInt(SubmitRecipeClicked.difficultyId),
-        "categoryId": parseInt(SubmitRecipeClicked.categoryId),
-    }
-    const fetchOption = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(submitRecipe)
-    }
-    return fetch("http://localhost:8088/recipes?_expand=difficulty&_expand=category", fetchOption)
+export const getAllIngredients = () => {
+    return fetch(`http://localhost:8088/ingredients`)
+    .then(res => res.json())
 }
+
+//Fetch calls posting new data to the fetch items by specific id
+
+
 
 
 //Fetch Calls editing data that exist in the API aka
@@ -56,3 +39,10 @@ export const saveRecipe = (SubmitRecipeClicked) => {
 
 //Fetch calls to remove selected items from the API aka
 // DELETE
+
+export const deleteRecipeByIdOnDashboard = (id) => {
+    return fetch(`http://localhost:8088/recipes/${id}`, { method: "DELETE" })
+}
+export const deleteIngredients = (id) => {
+    return fetch(`http://localhost:8088/ingredients/${id}`, { method: "DELETE" })
+}

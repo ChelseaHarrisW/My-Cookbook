@@ -1,8 +1,9 @@
 //this component is responsible for creating the visual representation of form that populates when the "New Recipe button"
 // that will lead to the recipe form where users can input recipe information
 import React, { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom"
-import { getAllDifficulties, getAllCategories } from "../Api-Manager"
+import { getAllDifficulties, getAllCategories, getAllIngredients } from "../Api-Manager"
 
 export const CreateRecipeForm = () => {
     const [recipe, setRecipe] = useState([])
@@ -11,8 +12,9 @@ export const CreateRecipeForm = () => {
     const [instructions, setInstructions] = useState("")
     const [difficulties, setDifficulties] = useState([])
     const [categories, setCategories] = useState([])
-    
-
+    const [ingredientUpdate, setIngredientUpdate] = useState([])
+    const [ingredient, setIngredient] = useState([])
+    const { recipeId } = useParams()
     const history = useHistory()
     // get the catagories, and difficulty to store in state variables
 
@@ -29,6 +31,13 @@ export const CreateRecipeForm = () => {
         getAllCategories()
             .then((categoriesFromApi) => {
                 setCategories(categoriesFromApi)
+            })
+    }
+        , [])
+    useEffect(() => {
+        getAllIngredients()
+            .then((ingredientUpdateFromApi) => {
+                setIngredientUpdate(ingredientUpdateFromApi)
             })
     }
         , [])
@@ -52,10 +61,24 @@ export const CreateRecipeForm = () => {
             body: JSON.stringify(submitRecipe)
         }
         return fetch("http://localhost:8088/recipes", fetchOption)
-            .then(() => {
-                history.push("/recipe")
+        .then((data)=> data.json())
+            .then((recipe) => {
+              ingredient.forEach(ingredient=> {
+                const newRecipeIngredientObj ={
+                    "recipeId" : parseInt(recipe.id),
+                    "ingredientId": parseInt(ingredient)
+                }
+                const fetchOption = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(newRecipeIngredientObj)
+                }
+                return fetch("http://localhost:8088/recipeIngredients", fetchOption)
+              })
                 // for ingredients you're going to need a .then and post each ingredient
-            })
+            }).then(()=>history.push("/"))
     }
 
     // define state variable [] (ingredientUpdate)
@@ -65,7 +88,7 @@ export const CreateRecipeForm = () => {
 
     // map the array to html objs that will display a list
 
-// render check box as ingredients
+    // render check box as ingredients
 
     return (
         <>
@@ -89,8 +112,8 @@ export const CreateRecipeForm = () => {
                     />
                 </div>
             </fieldset>
-        
-                   
+
+
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="description">Cook time (in minutes)</label>
@@ -109,8 +132,10 @@ export const CreateRecipeForm = () => {
 
 
                     />
+
                 </div>
             </fieldset>
+           
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="description"> Instructions</label>
@@ -184,6 +209,32 @@ export const CreateRecipeForm = () => {
 
                 </div>
             </fieldset>
+
+            <h3>Do you have everything you need?:</h3>
+        <fieldset>
+            <div className="form-group">
+                <label htmlFor="name"> <div>{ingredientUpdate.map(item => {
+                    return (
+                        <div key={`new--items-${item.id}`}>{item.name}
+                            <input type="checkbox"
+                            id={item.id}
+                                onChange={(evt) => {
+                                    const copy = [ ...ingredient ]
+                                    copy.push(evt.target.id)
+                                    setIngredient(copy) // needed to track the updated copies (changes in state)
+                                }
+
+                                }
+                            />
+                        </div>)
+                })}
+                </div>
+                </label>
+            </div>
+        </fieldset>
+        <div>
+            <button onClick={() => history.push(`/recipe/create/${recipe.id}`)}> back to recipe</button>
+        </div>
 
             <button className="btn btn-primary" onClick={
                 (evt) => {

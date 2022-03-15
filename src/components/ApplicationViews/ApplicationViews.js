@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Route } from "react-router-dom";
+import { EditRecipe } from "../EditFeatures/EditRecipe";
 import { CreateRecipeForm } from "../Recipe/CreateRecipe";
 import { IngredientForm } from "../Recipe/IngredientForm";
 import { RecipeCard } from "../Recipe/RecipeCard";
@@ -18,7 +19,7 @@ export const ApplicationViews = () => {
        <Route exact path = {["/", "/recipe"]}>
            <RecipeList />
        </Route>
-       <Route exact path = "/recipe/create">
+       <Route exact path = "/recipe/create/">
            <CreateRecipeForm />
        </Route>
        
@@ -27,6 +28,12 @@ export const ApplicationViews = () => {
        </Route>
        <Route exact path =  "/recipe-details/:recipeId(\d+)">
            <RecipeCard />
+       </Route>
+       <Route exact path =  "/recipe/edit/:recipeId(\d+)">
+           <EditRecipe />
+       </Route>
+       <Route exact path =  "/recipe/delete/:recipeId(\d+)">
+           <deleteRecipeByIdOnDashboard />
        </Route>
         
         </>

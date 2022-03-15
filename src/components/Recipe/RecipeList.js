@@ -4,7 +4,8 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Link } from "react-router-dom/cjs/react-router-dom.min"
-import { getAllRecipesWithDifficultyAndCategory } from "../Api-Manager"
+import { deleteRecipeByIdOnDashboard, getAllRecipesWithDifficultyAndCategory } from "../Api-Manager"
+import { EditRecipe } from "../EditFeatures/EditRecipe"
 
 // define a function that will be responsible for rendering the recipe information
 export const RecipeList = () => {
@@ -25,12 +26,14 @@ export const RecipeList = () => {
     return (
         <>
             <h2>My Recipe Dashboard</h2>
-            <button onClick={() => { history.push("/recipe/create") }}>+ My New Recipe</button>
+            <button onClick={() => { history.push(`/recipe/create/`) }}> My New Recipe</button>
             {
                 Recipes.map(Recipe => {
                     return <div key={`recipe--${Recipe.id}`} className="recipe">
                       {Recipe.title} is {Recipe.category.type} and is {Recipe.difficulty.level} to make
-                        <button className="recipe-details-button" onClick={() => history.push(`/recipe-details/${Recipe.id}`)}> View Recipe Details</button> 
+                      <div>  <button className="recipe-details-button" onClick={() => history.push(`/recipe-details/${Recipe.id}`)}> View Recipe Details</button> </div>
+                      <div>  <button className="recipe-details-button" onClick={() => deleteRecipeByIdOnDashboard(Recipe.id)}> Delete</button> </div>
+                      <div>  <button className="recipe-details-button" onClick={() => history.push(`/recipe/edit/${Recipe.id}`)}> Edit</button> </div>
                     </div>
                 })
             }

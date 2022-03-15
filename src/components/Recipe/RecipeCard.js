@@ -30,7 +30,7 @@ export const RecipeCard = () => {
            
            
                                 <>
-                                  <div   key={`title--${recipe?.id}`}> My {recipe?.title} Recipe </div>
+                                  <div   key={`title--${recipe.id}`}> {recipe?.title}  </div>
                         
                 {
                     recipeCards.map(
@@ -82,3 +82,7 @@ export const RecipeCard = () => {
 //             </>
 // })
 //         )    }
+
+//button for the re render back to recipe section
+{/* <button onClick={ 
+   () => history.push("/recipe")}> Back to Recipe</button> */}
