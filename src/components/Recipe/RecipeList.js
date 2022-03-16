@@ -20,7 +20,19 @@ export const RecipeList = () => {
     },
         []
     )
-
+const deleteRecipe = (id) => {
+    return deleteRecipeByIdOnDashboard(id)
+    .then(() => 
+        getAllRecipesWithDifficultyAndCategory()
+        .then(
+            (data) => {
+                setRecipes(data)
+                
+                .then(()=> history.push(`/recipe`))
+            
+        })
+    )
+}
    
 
     return (
@@ -32,7 +44,7 @@ export const RecipeList = () => {
                     return <div key={`recipe--${Recipe.id}`} className="recipe">
                       {Recipe.title} is {Recipe.category.type} and is {Recipe.difficulty.level} to make
                       <div>  <button className="recipe-details-button" onClick={() => history.push(`/recipe-details/${Recipe.id}`)}> View Recipe Details</button> </div>
-                      <div>  <button className="recipe-details-button" onClick={() => deleteRecipeByIdOnDashboard(Recipe.id)}> Delete</button> </div>
+                      <div>  <button className="recipe-details-button" onClick={() => deleteRecipe(Recipe.id)}> Delete</button> </div>
                       <div>  <button className="recipe-details-button" onClick={() => history.push(`/recipe/edit/${Recipe.id}`)}> Edit</button> </div>
                     </div>
                 })

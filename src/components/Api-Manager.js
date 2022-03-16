@@ -42,7 +42,9 @@ export const getAllIngredients = () => {
 
 export const deleteRecipeByIdOnDashboard = (id) => {
     return fetch(`http://localhost:8088/recipes/${id}`, { method: "DELETE" })
+    
 }
 export const deleteIngredients = (id) => {
     return fetch(`http://localhost:8088/ingredients/${id}`, { method: "DELETE" })
+    
 }

@@ -47,6 +47,7 @@ export const IngredientForm = () => {
             const updatedChangeRecipe = {
                 "title": Recipe.title,
                 "cookTime": Recipe.cookTime,
+                "instructions": Recipe.instructions,
                 "difficultyId": parseInt(Recipe.difficultyId),
                 "categoryId": parseInt(Recipe.categoryId),
             }
@@ -126,9 +127,7 @@ export const IngredientForm = () => {
                 </label>
             </div>
         </fieldset>
-        <div>
-            <button onClick={() => history.push(`/recipe/create/${Recipe.id}`)}> back to recipe</button>
-        </div>
+        
     </>
 
 

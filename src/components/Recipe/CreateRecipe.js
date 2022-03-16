@@ -50,6 +50,7 @@ export const CreateRecipeForm = () => {
         const submitRecipe = {
             "title": recipe.title,
             "cookTime": recipe.cookTime,
+            "instructions": recipe.instructions,
             "difficultyId": parseInt(recipe.difficultyId),
             "categoryId": parseInt(recipe.categoryId),
         }
@@ -232,9 +233,7 @@ export const CreateRecipeForm = () => {
                 </label>
             </div>
         </fieldset>
-        <div>
-            <button onClick={() => history.push(`/recipe/create/${recipe.id}`)}> back to recipe</button>
-        </div>
+       
 
             <button className="btn btn-primary" onClick={
                 (evt) => {

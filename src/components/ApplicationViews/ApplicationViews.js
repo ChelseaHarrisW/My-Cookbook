@@ -32,9 +32,7 @@ export const ApplicationViews = () => {
        <Route exact path =  "/recipe/edit/:recipeId(\d+)">
            <EditRecipe />
        </Route>
-       <Route exact path =  "/recipe/delete/:recipeId(\d+)">
-           <deleteRecipeByIdOnDashboard />
-       </Route>
+      
         
         </>
     )
