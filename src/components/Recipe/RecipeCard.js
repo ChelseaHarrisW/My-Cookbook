@@ -31,6 +31,7 @@ export const RecipeCard = () => {
            
                                 <>
                                   <h2   key={`title--${recipe.id}`}> {recipe?.title}  </h2>
+                                  <div   key={`title--${recipe.id}`}> {recipe?.cookTime}  </div>
                                 <div> Ingredients you will need: </div>
                 {
                     recipeCards.map(
@@ -38,7 +39,7 @@ export const RecipeCard = () => {
                             
                             return (
                                 <>
-                                    <div key={`recipeCard--${recipeCardObj.id}`}> {recipeCardObj?.measurement} {recipeCardObj?.ingredient?.name}</div>
+                                    <div key={`recipeCard--${recipeCardObj.id}`}> {recipeCardObj?.ingredient?.measurement} {recipeCardObj?.ingredient?.name}</div>
                                   
     
                                 </>
@@ -46,6 +47,7 @@ export const RecipeCard = () => {
                         }
                         )
                     }
+                    <div   key={`title--${recipe?.id}`}> How to prepare the meal? </div>
                     <div   key={`title--${recipe?.id}`}> {recipe?.instructions} </div>
                   </>
                   

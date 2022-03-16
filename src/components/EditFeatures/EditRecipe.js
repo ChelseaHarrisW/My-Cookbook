@@ -160,6 +160,7 @@ export const EditRecipe = (props) => {
                             <input type="radio"
                                 id="name"
                                 value={difficulty.id}
+                                checked={changeRecipe.difficultyId=== difficulty.id}
                                 onChange={
                                     (evt) => {
                                         const copy = { ...changeRecipe }
@@ -186,6 +187,7 @@ export const EditRecipe = (props) => {
                             <input type="radio"
                                 id="name"
                                 value={category.id}
+                                checked={changeRecipe.categoryId=== category.id}
                                 name="category"
                                 onChange={
                                     (evt) => {
