@@ -38,29 +38,20 @@ import "./SearchBar.css"
 import { useHistory } from "react-router-dom";
 import { getAllRecipesWithDifficultyAndCategory, getAllRecipesWithIngredients } from "../Api-Manager";
 
-const SearchBar = ({ toggleSearchBar }) => {
+const SearchBar = ({ Recipes, setRecipes, updateSearchResults }) => {
     const [recipe, setRecipe] = useState([])
-    const [searchResults, updateSearchResults] = useState([])
+    
     const [userInput, updateUserInput] = useState("")
     const history = useHistory()
 
-    useEffect(
-        () => {
-            getAllRecipesWithIngredients()
-            .then(
-                (recipesFromApi) => {
-                    setRecipe(recipesFromApi)}
-                )
-                //debugger
-            
-        }, [])
+
 
     const handleSearch = (event) => {
         const searchCriteria = event.target.value
         updateUserInput(searchCriteria)
-        const filteredRecipe = recipe.filter(recipe => recipe.title.toLowerCase().includes(searchCriteria.toLowerCase()) || recipe.title.toLowerCase().includes(searchCriteria.toLowerCase()))
+        const filteredRecipe = Recipes.filter(recipe => recipe.title.toLowerCase().includes(searchCriteria.toLowerCase()) )
         if (searchCriteria === "") {
-            updateSearchResults([])
+            updateSearchResults(Recipes)
         }
         else {
             updateSearchResults(filteredRecipe)
@@ -74,27 +65,11 @@ const SearchBar = ({ toggleSearchBar }) => {
 
     return (
         <div className="search">
-            <h4>Search </h4>
+            <h4>Search My Recipes</h4>
             <div className="searchInput">
                 <input type="text" autoFocus value={userInput} onChange={handleSearch} />
                 
-            </div>{
-                searchResults.length
-                    ?
-                    <div className="searchResults">
-                        {
-                            searchResults.slice(0, 15).map((recipe, key) => {
-                                return (
-                                    <div key={recipe.id} className="bookItem" onClick={() => history.push(`/search/${recipe.id}`)}>
-                                        <div>{recipe.title}</div>
-                                        <div> {recipe.instructions}</div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                    : ""
-            }
+            </div>
         </div>
     )
 }

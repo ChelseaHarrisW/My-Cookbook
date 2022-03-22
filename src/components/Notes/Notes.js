@@ -13,7 +13,8 @@ export const Notes = ({notes, users}) => {
                 filteredNotes.map(note => {
                     const foundUser = users.find(user => user.id === note.userId)
                     return <div key={note.id} className="single-note-container">
-                    <div key={`note--${note.id}`} className="single-note"><h4 className="noter">{foundUser?.name} note added by:</h4> {note.body}</div>
+                    <div key={`note--${note.id}`} className="single-note"> Note added by:<b className="noter">{foundUser?.name}</b> </div>
+                    <div> {note.body} </div>
                     </div> 
                 }
                 )

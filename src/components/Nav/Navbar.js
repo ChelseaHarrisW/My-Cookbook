@@ -3,12 +3,15 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import "./Navbar.css"
-import Searchbar from "./SearchBar"
+
+import { useTheme } from "../Hooks/UseTheme";
 
 
 export const Navbar = (props) => {
+    const { color } = useTheme();
     return (
-        <ul className="navbar">
+        <ul className="navbar" style={{ backgroundImage: color }}
+        >
              <div className="navbar__Title">
                 
                     <h1>My Recipes</h1>
@@ -32,7 +35,7 @@ export const Navbar = (props) => {
                 Logout
                 </Link>
             </ul>
-                    <div className="navbar__search">< Searchbar /></div>  
+
         </ul>
     )
 }

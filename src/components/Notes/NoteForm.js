@@ -16,8 +16,8 @@ export const NoteForm = ({setNotes}) => {
     
     const saveNote = () => {
         const noteObject = {
-            userId: parseInt(localStorage.getItem("cookBook_user")),
-            note: note.body,
+            userId: parseInt(localStorage.getItem("cook_user")),
+            body: note.body,
             recipeId: parseInt(recipeId)
         }
         // use fetch method POST to save object into API
@@ -47,7 +47,7 @@ export const NoteForm = ({setNotes}) => {
     }
     return (
         <article className="note-form">
-            <h3>Notes</h3>
+            <h3>Type Notes Here</h3>
             <textarea
                         required
                         type="text"

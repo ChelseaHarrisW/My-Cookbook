@@ -45,13 +45,21 @@
     border-radius: 4px;
     margin: 20px auto 0;
   }
-  .button {
-    background-color: rgb(168, 168, 228); 
+  .recipe-details-button {
+    background-color: rgb(70, 70, 99); 
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 15px 50px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    flex:auto
+  }
+
+  .search{
+      align-items: center;
+      display: flex;
+      justify-content: center
+
   }

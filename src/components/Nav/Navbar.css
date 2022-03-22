@@ -1,6 +1,6 @@
 .navbar {
     display: flex;
-    background: pink;
+    background: rgb(70, 70, 99);
     padding: 20px;
     color: #fff;
     justify-content: space-between;

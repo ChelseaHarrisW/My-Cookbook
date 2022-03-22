@@ -58,9 +58,10 @@ export const RecipeCard = () => {
            
            
                                 <>
+                                <section className="card-container">
                                   <h2   key={`title--${recipe.id}`}> {recipe?.title}  </h2>
                                   <div   key={`cookTime--${recipe.id}`}> {recipe?.cookTime}  </div>
-                                <div> Ingredients you will need: </div>
+                                <div className="ingredients"> Ingredients you will need: </div>
                 {
                     recipeCards.map(
                         (recipeCardObj) => {
@@ -75,8 +76,8 @@ export const RecipeCard = () => {
                         }
                         )
                     }
-                    <div   key={`prep--${recipe?.id}`}> How to prepare the meal? </div>
-                    <div   key={`prepInstructions--${recipe?.id}`}> {recipe?.instructions} </div>
+                    <div className="prepare" key={`prep--${recipe?.id}`}> How to prepare the meal? </div>
+                    <div className="prepare-ingredients"  key={`prepInstructions--${recipe?.id}`}> {recipe?.instructions} </div>
 
                     <section>
                         <NoteForm
@@ -89,6 +90,8 @@ export const RecipeCard = () => {
                             notes = {notes}
                             users = {users}
                             setUsers = {setUsers}/>
+
+            </section>
             </section>
                   </>
                   

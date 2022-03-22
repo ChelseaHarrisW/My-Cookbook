@@ -9,12 +9,14 @@ import { IngredientForm } from "../Recipe/IngredientForm";
 import { RecipeCard } from "../Recipe/RecipeCard";
 import { RecipeList } from "../Recipe/RecipeList";
 
-
+import ThemeSelector from "../ThemeSelector/ThemeSelector";
+import {useTheme} from "../Hooks/UseTheme"
 
 
 
 
 export const ApplicationViews = () => {
+    const { mode } = useTheme();
     return (
         <>
        <Route exact path = {["/", "/recipe"]}>
