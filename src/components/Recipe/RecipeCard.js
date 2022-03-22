@@ -3,11 +3,17 @@
 
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getAllRecipesWithIngredients } from "../Api-Manager"
+
+import { getAllFavoritesByUser, getAllNotes, getAllRecipesWithIngredients, getAllUsers } from "../Api-Manager"
+import { NoteForm } from "../Notes/NoteForm"
+import { Notes } from "../Notes/Notes"
 
 export const RecipeCard = () => {
     //define a function called recipe card that represent a single recipe Item
     const [recipeCards, setRecipeCards] = useState([])
+    const [notes, setNotes] = useState([])
+    const [users, setUsers] = useState([])
+    const [favorites, setFavorites] = useState([])
     const [recipe, setRecipe] = useState({})
     // declare a use state variable to manage state changes
     const { recipeId } = useParams()
@@ -25,13 +31,35 @@ export const RecipeCard = () => {
             
         }, [])
 
+        useEffect(
+            () => {
+                getAllUsers()
+                    .then((data) => {setUsers(data)})
+                    .then(getAllFavoritesByUser)
+                    .then((data) => {setFavorites(data)})
+            },
+            []
+        )
+        useEffect(
+            () => {
+                getAllNotes()
+                    .then((data) => {
+                        // set step state with data from API
+                        setNotes(data)
+                    })
+            },
+            []
+        )
+
+        
+
         return (
             <>
            
            
                                 <>
                                   <h2   key={`title--${recipe.id}`}> {recipe?.title}  </h2>
-                                  <div   key={`title--${recipe.id}`}> {recipe?.cookTime}  </div>
+                                  <div   key={`cookTime--${recipe.id}`}> {recipe?.cookTime}  </div>
                                 <div> Ingredients you will need: </div>
                 {
                     recipeCards.map(
@@ -47,8 +75,21 @@ export const RecipeCard = () => {
                         }
                         )
                     }
-                    <div   key={`title--${recipe?.id}`}> How to prepare the meal? </div>
-                    <div   key={`title--${recipe?.id}`}> {recipe?.instructions} </div>
+                    <div   key={`prep--${recipe?.id}`}> How to prepare the meal? </div>
+                    <div   key={`prepInstructions--${recipe?.id}`}> {recipe?.instructions} </div>
+
+                    <section>
+                        <NoteForm
+                            setNotes = {setNotes}
+                            notes = {notes}
+                            users = {users}
+                            setUsers = {setUsers}/>
+                        <Notes
+                            setNotes = {setNotes}
+                            notes = {notes}
+                            users = {users}
+                            setUsers = {setUsers}/>
+            </section>
                   </>
                   
             </>

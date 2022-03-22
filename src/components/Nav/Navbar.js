@@ -3,19 +3,25 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import "./Navbar.css"
+import Searchbar from "./SearchBar"
 
 
 export const Navbar = (props) => {
     return (
         <ul className="navbar">
-             <li className="navbar__item active">
+             <div className="navbar__Title">
+                
+                    <h1>My Recipes</h1>
+                    
+            </div>
+             <ul className="navbar__item active">
                 <Link className="navbar__link" to="/">My Recipe Dashboard</Link>
-            </li>
-             <li className="navbar__item active">
+            </ul>
+             <ul className="navbar__item active">
                 <Link className="navbar__link" to="/ingredients">Ingredients</Link>
-            </li>
+            </ul>
            
-            <li className="navbar__item active">
+            <ul className="navbar__item active">
                 <Link className="navbar__item" to="#"
                 onClick={
                     () => {
@@ -25,7 +31,8 @@ export const Navbar = (props) => {
                 }>
                 Logout
                 </Link>
-            </li>
+            </ul>
+                    <div className="navbar__search">< Searchbar /></div>  
         </ul>
     )
 }

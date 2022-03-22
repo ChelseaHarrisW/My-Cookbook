@@ -3,6 +3,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { EditRecipe } from "../EditFeatures/EditRecipe";
+import Searchbar from "../Nav/SearchBar";
 import { CreateRecipeForm } from "../Recipe/CreateRecipe";
 import { IngredientForm } from "../Recipe/IngredientForm";
 import { RecipeCard } from "../Recipe/RecipeCard";
@@ -25,6 +26,9 @@ export const ApplicationViews = () => {
        
        <Route exact path = "/ingredients">
            <IngredientForm />
+       </Route>
+       <Route exact path = "/search">
+           < Searchbar/>
        </Route>
        <Route exact path =  "/recipe-details/:recipeId(\d+)">
            <RecipeCard />
