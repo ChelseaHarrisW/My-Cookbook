@@ -3,17 +3,20 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { EditRecipe } from "../EditFeatures/EditRecipe";
+import Searchbar from "../Nav/SearchBar";
 import { CreateRecipeForm } from "../Recipe/CreateRecipe";
 import { IngredientForm } from "../Recipe/IngredientForm";
 import { RecipeCard } from "../Recipe/RecipeCard";
 import { RecipeList } from "../Recipe/RecipeList";
 
-
+import ThemeSelector from "../ThemeSelector/ThemeSelector";
+import {useTheme} from "../Hooks/UseTheme"
 
 
 
 
 export const ApplicationViews = () => {
+    const { mode } = useTheme();
     return (
         <>
        <Route exact path = {["/", "/recipe"]}>
@@ -25,6 +28,9 @@ export const ApplicationViews = () => {
        
        <Route exact path = "/ingredients">
            <IngredientForm />
+       </Route>
+       <Route exact path = "/search">
+           < Searchbar/>
        </Route>
        <Route exact path =  "/recipe-details/:recipeId(\d+)">
            <RecipeCard />

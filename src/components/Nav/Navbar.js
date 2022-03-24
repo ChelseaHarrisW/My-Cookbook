@@ -4,18 +4,27 @@ import React from "react"
 import { Link } from "react-router-dom"
 import "./Navbar.css"
 
+import { useTheme } from "../Hooks/UseTheme";
+
 
 export const Navbar = (props) => {
+    const { color } = useTheme();
     return (
-        <ul className="navbar">
-             <li className="navbar__item active">
+        <ul className="navbar" style={{ backgroundImage: color }}
+        >
+             <div className="navbar__Title">
+                
+                    <h1>My Recipes</h1>
+                    
+            </div>
+             <ul className="navbar__item active">
                 <Link className="navbar__link" to="/">My Recipe Dashboard</Link>
-            </li>
-             <li className="navbar__item active">
+            </ul>
+             <ul className="navbar__item active">
                 <Link className="navbar__link" to="/ingredients">Ingredients</Link>
-            </li>
+            </ul>
            
-            <li className="navbar__item active">
+            <ul className="navbar__item active">
                 <Link className="navbar__item" to="#"
                 onClick={
                     () => {
@@ -25,7 +34,8 @@ export const Navbar = (props) => {
                 }>
                 Logout
                 </Link>
-            </li>
+            </ul>
+
         </ul>
     )
 }
