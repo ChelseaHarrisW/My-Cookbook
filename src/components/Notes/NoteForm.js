@@ -3,7 +3,7 @@ import { useParams } from "react-router"
 import "./NoteForm.css"
 import { useHistory } from "react-router"
 import { getAllNotes } from "../Api-Manager"
-
+import TextField from '@material-ui/core/TextField'
 
 export const NoteForm = ({setNotes}) => {
     const history = useHistory() 

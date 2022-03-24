@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom"
-
+import TextField from '@material-ui/core/TextField'
+import FormControl from '@mui/material/FormControl'
 export const IngredientForm = () => {
     const [ingredient, setIngredient] = useState({
         "name": "",
@@ -66,14 +67,14 @@ export const IngredientForm = () => {
                 })
         }
     return (<>
-        <fieldset>
+        <FormControl>
             <div className="form-group">
                 <label htmlFor="description">Ingredient</label>
-                <input
+                <TextField
                     required autoFocus
                     type="text"
                     className="form-control"
-                    placeholder="What item will you need?"
+                    placeholder="What do you need?"
                     value={ingredient.name}
                     onChange={
                         (evt) => {
@@ -84,15 +85,15 @@ export const IngredientForm = () => {
                 />
 
             </div>
-        </fieldset>
-        <fieldset>
+        </FormControl>
+        <FormControl>
             <div className="form-group">
                 <label htmlFor="description">Measurement</label>
-                <input
+                <TextField
                     required autoFocus
                     type="text"
                     className="form-control"
-                    placeholder="How much will you be needing?"
+                    placeholder="How much?"
                     value={ingredient.measurement}
                     onChange={
                         (evt) => {
@@ -105,9 +106,9 @@ export const IngredientForm = () => {
 
 
             </div>
-        </fieldset>
+        </FormControl>
         <h3>Ingredient List:</h3>
-        <fieldset>
+        <FormControl>
             <div className="form-group">
                 <label htmlFor="name"> <div>{ingredientUpdate.map(ingredient => {
                     return (
@@ -126,7 +127,7 @@ export const IngredientForm = () => {
                 </div>
                 </label>
             </div>
-        </fieldset>
+        </FormControl>
         
     </>
 

@@ -27,12 +27,15 @@ export const RecipeList = () => {
         []
     )
 const deleteRecipe = (id) => {
-    return deleteRecipeByIdOnDashboard(id)
+     deleteRecipeByIdOnDashboard(id)
     .then(() => 
         getAllRecipesWithDifficultyAndCategory()
         .then(
             (data) => {
                 setRecipes(data)
+                let copy = [...searchResults]
+                copy= copy.filter(recipes => recipes.id != id)
+                updateSearchResults(copy)
                 
                 .then(()=> history.push(`/recipe`))
             

@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom"
 import { getAllDifficulties, getAllCategories, getAllIngredients } from "../Api-Manager"
-
+import TextField from '@material-ui/core/TextField'
+import TextareaAutosize from '@mui/base/TextareaAutosize';
 export const CreateRecipeForm = () => {
     const [recipe, setRecipe] = useState([])
     const [title, setTitle] = useState("")
@@ -62,24 +63,24 @@ export const CreateRecipeForm = () => {
             body: JSON.stringify(submitRecipe)
         }
         return fetch("http://localhost:8088/recipes", fetchOption)
-        .then((data)=> data.json())
+            .then((data) => data.json())
             .then((recipe) => {
-              ingredient.forEach(ingredient=> {
-                const newRecipeIngredientObj ={
-                    "recipeId" : parseInt(recipe.id),
-                    "ingredientId": parseInt(ingredient)
-                }
-                const fetchOption = {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(newRecipeIngredientObj)
-                }
-                return fetch("http://localhost:8088/recipeIngredients", fetchOption)
-              })
+                ingredient.forEach(ingredient => {
+                    const newRecipeIngredientObj = {
+                        "recipeId": parseInt(recipe.id),
+                        "ingredientId": parseInt(ingredient)
+                    }
+                    const fetchOption = {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(newRecipeIngredientObj)
+                    }
+                    return fetch("http://localhost:8088/recipeIngredients", fetchOption)
+                })
                 // for ingredients you're going to need a .then and post each ingredient
-            }).then(()=>history.push("/"))
+            }).then(() => history.push("/"))
     }
 
     // define state variable [] (ingredientUpdate)
@@ -94,11 +95,12 @@ export const CreateRecipeForm = () => {
     return (
         <>
             <h2 className="recipeForm__title">My New Recipe</h2>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="description">Title</label>
-                    <input
+            <form>
 
+                <div className="form-group">
+                    <label htmlFor="description"><h3>Title</h3></label>
+                    <TextField
+    style={{ height: 50, width: 1000 }}
                         required autoFocus
                         type="text"
                         className="form-control"
@@ -112,13 +114,14 @@ export const CreateRecipeForm = () => {
 
                     />
                 </div>
-            </fieldset>
+            </form>
 
 
-            <fieldset>
+            <form>
                 <div className="form-group">
-                    <label htmlFor="description">Cook time (in minutes)</label>
-                    <input
+                    <label htmlFor="description"><h3>Cook time</h3> <div>(in minutes)</div></label>
+                    <TextField
+                    style={{ height: 50, width: 1000 }}
                         required autoFocus
                         type="text"
                         className="form-control"
@@ -135,12 +138,16 @@ export const CreateRecipeForm = () => {
                     />
 
                 </div>
-            </fieldset>
-           
-            <fieldset>
+            </form>
+
+            <form>
+
                 <div className="form-group">
-                    <label htmlFor="description"> Instructions</label>
-                    <input
+                    <label htmlFor="description"> <h3>Instructions</h3></label>
+                    <TextareaAutosize
+
+                        style={{ height: 300, width: 1000 }}
+
                         required autoFocus
                         type="text"
                         className="form-control"
@@ -156,9 +163,10 @@ export const CreateRecipeForm = () => {
 
                     />
                 </div>
-            </fieldset>
+            </form>
 
-            <fieldset>
+            <form>
+                <h3>Difficulty Level</h3>
                 <div className="form-group">
                     {difficulties.map(difficulty => {
                         return <>
@@ -183,8 +191,9 @@ export const CreateRecipeForm = () => {
 
 
                 </div>
-            </fieldset>
-            <fieldset>
+            </form>
+            <form>
+                <h3> SelectCategory</h3>
                 <div className="form-group">
                     {categories.map(category => {
                         return <>
@@ -209,31 +218,31 @@ export const CreateRecipeForm = () => {
 
 
                 </div>
-            </fieldset>
+            </form>
 
             <h3>Do you have everything you need?:</h3>
-        <fieldset>
-            <div className="form-group">
-                <label htmlFor="name"> <div>{ingredientUpdate.map(item => {
-                    return (
-                        <div key={`new--items-${item.id}`}>{item.name}
-                            <input type="checkbox"
-                            id={item.id}
-                                onChange={(evt) => {
-                                    const copy = [ ...ingredient ]
-                                    copy.push(evt.target.id)
-                                    setIngredient(copy) // needed to track the updated copies (changes in state)
-                                }
+            <form>
+                <div className="form-group">
+                    <label htmlFor="name"> <div>{ingredientUpdate.map(item => {
+                        return (
+                            <div key={`new--items-${item.id}`}>{item.name}
+                                <input type="checkbox"
+                                    id={item.id}
+                                    onChange={(evt) => {
+                                        const copy = [...ingredient]
+                                        copy.push(evt.target.id)
+                                        setIngredient(copy) // needed to track the updated copies (changes in state)
+                                    }
 
-                                }
-                            />
-                        </div>)
-                })}
+                                    }
+                                />
+                            </div>)
+                    })}
+                    </div>
+                    </label>
                 </div>
-                </label>
-            </div>
-        </fieldset>
-       
+            </form>
+
 
             <button className="btn btn-primary" onClick={
                 (evt) => {

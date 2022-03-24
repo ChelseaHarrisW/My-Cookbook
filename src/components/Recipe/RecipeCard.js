@@ -58,7 +58,7 @@ export const RecipeCard = () => {
            
            
                                 <>
-                                <section className="card-container">
+                                <div className="card-container">
                                   <h2   key={`title--${recipe.id}`}> {recipe?.title}  </h2>
                                   <div   key={`cookTime--${recipe.id}`}> {recipe?.cookTime}  </div>
                                 <div className="ingredients"> Ingredients you will need: </div>
@@ -92,7 +92,7 @@ export const RecipeCard = () => {
                             setUsers = {setUsers}/>
 
             </section>
-            </section>
+            </div>
                   </>
                   
             </>
